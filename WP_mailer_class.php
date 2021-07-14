@@ -12,7 +12,7 @@ class WP_mailer_class {
 	 * It can be false, if you have the e-mail
 	 * available when instatiating this class.
 	 *
-	 * @var MIXED
+	 * @var mixed $id
 	 */
 	public $id;
 
@@ -20,28 +20,28 @@ class WP_mailer_class {
 	 * The receiver e-mail.
 	 * It should be set to false if only user id is available.
 	 *
-	 * @var MIXED
+	 * @var mixed $to
 	 */
 	public $to;
 
 	/**
 	 * Title of the e-mail.
 	 *
-	 * @var STRING
+	 * @var string $subject
 	 */
 	public $subject;
 
 	/**
 	 * Headers of the e-mail.
 	 *
-	 * @var ARRAY
+	 * @var array $headers
 	 */
 	public $headers;
 
 	/**
 	 * Body of the email.
 	 *
-	 * @var STRING
+	 * @var string $message
 	 */
 	public $message;
 
@@ -49,10 +49,10 @@ class WP_mailer_class {
 	 * Constructor method.
 	 * It will receive the parameters and equate then to the class properties.
 	 *
-	 * @param MIXED  $id
-	 * @param MIXED  $to
-	 * @param STRING $subject
-	 * @param STRING $message
+	 * @param mixed  $id
+	 * @param mixed  $to
+	 * @param string $subject
+	 * @param string $message
 	 */
 	public function __construct( $id, $to, $subject, $message ) {
 		if ( $id !== false ) {
@@ -78,7 +78,7 @@ class WP_mailer_class {
 	 * If only user id is available,
 	 * this function will retrieve the user email by the provided id.
 	 *
-	 * @return STRING
+	 * @return string
 	 */
 	public function get_user_email_by_id() {
 		$user_info  = get_userdata( $this->id );
