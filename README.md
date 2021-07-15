@@ -16,5 +16,5 @@ $send_mail = new WP_mailer_class( 1, false, 'Amazing subject!', 'Amazing message
 Here, only e-mail is provided
 
 ```php
-$send_mail = new WP_mailer_class( false, youruser@mail.com, 'Amazing subject!', 'Amazing message!' );
+$send_mail = new WP_mailer_class( false, 'youruser@mail.com', 'Amazing subject!', 'Amazing message!' );
 ```
