@@ -5,20 +5,10 @@
  * NOTICE - The function wp_mail is only available after wp_load is rendered.
  * So, it may not work depending on WHEN your application is hooked on.
  */
-class WP_mailer_class {
+class WPMailerClass {
 
 	/**
-	 * User id. Can be either a string or an int.
-	 * It can be false, if you have the e-mail
-	 * available when instatiating this class.
-	 *
-	 * @var mixed $id
-	 */
-	public $id;
-
-	/**
-	 * The receiver e-mail.
-	 * It should be set to false if only user id is available.
+	 * User id or email. It Can be either an int or a string.
 	 *
 	 * @var mixed $to
 	 */
@@ -49,29 +39,24 @@ class WP_mailer_class {
 	 * Constructor method.
 	 * It will receive the parameters and equate then to the class properties.
 	 *
-	 * @param mixed  $id
 	 * @param mixed  $to
 	 * @param string $subject
 	 * @param string $message
 	 */
-	public function __construct( $id, $to, $subject, $message ) {
-		if ( $id !== false ) {
-			$this->id = (int) $id;
+	public function __construct( $to, $subject, $message ) {
+		if ( is_int( $to ) || ctype_digit( $to ) ) {
+			$this->to = $this->getUserEmailById();
 		}
 
-		if ( is_string( $to ) ) {
+		if ( is_string( $to ) && filter_var( $to, FILTER_VALIDATE_EMAIL ) ) {
 			$this->to = $to;
-		}
-
-		if ( $to === false ) {
-			$this->to = $this->get_user_email_by_id();
 		}
 
 		$this->subject = $subject;
 		$this->headers = array( 'Content-Type: text/html; charset=UTF-8', 'From:' . get_bloginfo() . ' <' . get_option( 'admin_email' ) . '>' );
 		$this->message = $message;
 
-		$this->send_mail();
+		$this->sendEmail();
 	}
 
 	/**
@@ -80,10 +65,10 @@ class WP_mailer_class {
 	 *
 	 * @return string
 	 */
-	public function get_user_email_by_id() {
-		$user_info  = get_userdata( $this->id );
-		$user_email = $user_info->user_email;
-		return $user_email;
+	public function getUserEmailById() {
+		$userInfo  = get_userdata( $this->id );
+		$userEmail = $userInfo->user_email;
+		return $userEmail;
 	}
 
 	/**
@@ -91,7 +76,7 @@ class WP_mailer_class {
 	 *
 	 * @return void
 	 */
-	public function send_mail() {
+	public function sendEmail() {
 		wp_mail( $this->to, $this->subject, $this->message, $this->headers );
 	}
 }
