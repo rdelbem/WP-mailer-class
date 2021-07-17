@@ -8,6 +8,13 @@
 class WPMailerClass {
 
 	/**
+	 * User id always expected to be an int.
+	 *
+	 * @var int $id
+	 */
+	public $id;
+
+	/**
 	 * User id or email. It Can be either an int or a string.
 	 *
 	 * @var mixed $to
@@ -45,10 +52,11 @@ class WPMailerClass {
 	 */
 	public function __construct( $to, $subject, $message ) {
 		if ( is_int( $to ) || ctype_digit( $to ) ) {
+			$this->id = (int) $to;
 			$this->to = $this->getUserEmailById();
 		}
 
-		if ( is_string( $to ) && filter_var( $to, FILTER_VALIDATE_EMAIL ) ) {
+		if ( is_string( $to ) && ! ctype_digit( $to ) && filter_var( $to, FILTER_VALIDATE_EMAIL ) ) {
 			$this->to = $to;
 		}
 
