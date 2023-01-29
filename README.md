@@ -27,7 +27,7 @@ And if you want to defensive handle errors you can do the following
 $send_mail = new WPMailerClass( 'youruser@mail.com', 'Amazing subject!', 'Amazing message!' );
 $result = $send_mail->sendEmail();
 
-if(!$result){
+if($result instanceof WP_Error){
     error_log($result->get_error_message()); // this will log 'WPMailerClass could not send email'
 }
 ```
