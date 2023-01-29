@@ -1,0 +1,21 @@
+{
+    "name": "rdelbem/wp-mailer-class",
+    "type": "wordpress-utility-class",
+    "require-dev": {
+        "10up/wp_mock": "*"
+    },
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "Rdelbem\\WPMailerClass\\": "./src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rodrigo Del Bem",
+            "email": "rodrigodelbem@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
