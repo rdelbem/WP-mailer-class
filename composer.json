@@ -2,7 +2,7 @@
   "name": "rdelbem/wp-mailer-class",
   "description": "Just a simple wrapper around the wp_mail function, now you can easily send an email from within WP without having to set a header by youself. We also provide some error handling",
   "type": "wordpress-utility-class",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "require": {
     "php": ">=8.0"
   },
